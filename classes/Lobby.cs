@@ -6,7 +6,7 @@ namespace Multiplayer;
 
 public class Lobby : Global
 {
-	public const int NetworkingChannelID = 1;
+	public const int NetworkingChannelID = 0;
 
 	public static CSteamID CurrentLobbySteamID = new(0u);
 	public static bool InLobby { get => CurrentLobbySteamID.m_SteamID != 0u; }
@@ -41,6 +41,7 @@ public class Lobby : Global
 		int index = args.IndexOf("+connect_lobby");
 		if (index > -1 && ++index != args.Length)
 		{
+			SteamExtraIntegration.AutoJoinSafety = true;
 			JoinLobby(ulong.Parse(args[index]));
 			return;
 		}
@@ -214,7 +215,6 @@ public class Lobby : Global
 		SteamNetworkingMessages.AcceptSessionWithUser(ref message.m_identityRemote);
 		HasOtherUser = true;
 		OtherUser = message.m_identityRemote;
-		// SendPacket(new(PacketType.StartSessionAccept));
 	}
 
 	public static void OnLobbyJoinRequest(GameLobbyJoinRequested_t message)

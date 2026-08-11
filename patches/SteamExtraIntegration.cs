@@ -7,6 +7,7 @@ namespace Multiplayer;
 public class SteamExtraIntegration : Global
 {
 	public static bool AutoJoinCheckDone = false;
+	public static bool AutoJoinSafety = false;
 	public static bool PreventLeaveLobbyOnSceneSwap = false;
 
 	[HarmonyPatch(typeof(SteamIntegration), nameof(SteamIntegration.Setup))]
@@ -59,6 +60,13 @@ public class SteamExtraIntegration : Global
     {
         public static void Postfix(string name)
 		{
+			if (AutoJoinSafety)
+			{
+				if (name == "scnGame")
+					AutoJoinSafety = false;
+				else
+					return;
+			}
 			if (name == "scnGame" && PreventLeaveLobbyOnSceneSwap)
             {
 				PreventLeaveLobbyOnSceneSwap = false;

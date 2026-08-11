@@ -72,8 +72,6 @@ public class ClientPackets : Global
 
 		if (!hasLevel)
 		{
-			if (!packet.IsStoryMode)
-				_ = CheckIfOnRDCafe(Path.GetFileNameWithoutExtension(packet.Level) + ".rdzip");
 			Log.LogMessage("Player doesn't have requested level.");
 			Lobby.LeaveLobby();
 			return;

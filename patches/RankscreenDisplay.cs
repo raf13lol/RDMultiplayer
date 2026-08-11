@@ -21,8 +21,10 @@ public class RankscreenDisplay : Global
 				scnCLS.CachedData.levelFileData = null;
 			if (IntendedRankSequence == 0 && !MultiplayerRankscreen)
 				MultiplayerRankscreen = Lobby.InMultiplayer;
+
 			if (!MultiplayerRankscreen)
 				return true;
+			__instance.game.currentLevel.skipRankText = false;
 
 			if (!SentData)
             {

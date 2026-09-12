@@ -1,4 +1,4 @@
-# MultiplayerEditor
+# RDMultiplayer
 
 ## bepinex 5/6 mod
 
